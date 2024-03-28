@@ -1,6 +1,7 @@
 services:
   - type: web
     name: mywagtail
+    plan: free
     env: python
     buildCommand: docker build -t mywagtail .
     startCommand: docker run -p 8000:8000 mywagtail
