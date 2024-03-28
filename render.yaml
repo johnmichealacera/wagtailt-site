@@ -1,22 +1,11 @@
-databases:
-  - name: mysitedb
-    plan: free
-    databaseName: mysite
-    user: mysite
-
 services:
   - type: web
-    plan: free
-    name: mysite
-    runtime: python
-    buildCommand: "./build.sh"
-    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
+    name: mywagtail
+    env: python
+    buildCommand: docker build -t mywagtail .
+    startCommand: docker run -p 8000:8000 mywagtail
+    healthCheckPath: /
+    healthCheckIntervalSeconds: 10
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: mysitedb
-          property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
+      - key: PORT
+        value: "8000"
