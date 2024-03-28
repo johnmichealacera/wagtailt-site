@@ -3,8 +3,10 @@ services:
     name: mywagtail
     plan: free
     env: python
-    buildCommand: docker build -t mywagtail .
-    startCommand: docker run -p 8000:8000 mywagtail
+    buildCommand: |
+      poetry install
+    startCommand: |
+      poetry run python manage.py runserver 0.0.0.0:$PORT
     envVars:
       - key: PORT
         value: "8000"
