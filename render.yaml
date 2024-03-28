@@ -3,8 +3,6 @@ services:
     name: mywagtail
     plan: free
     env: python
-    buildCommand: |
-      poetry install
     startCommand: |
       python manage.py migrate --noinput
       python manage.py createsuperuser --noinput --username admin
