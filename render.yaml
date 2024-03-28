@@ -4,8 +4,6 @@ services:
     env: python
     buildCommand: docker build -t mywagtail .
     startCommand: docker run -p 8000:8000 mywagtail
-    healthCheckPath: /
-    healthCheckIntervalSeconds: 10
     envVars:
       - key: PORT
         value: "8000"
